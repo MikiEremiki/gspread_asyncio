@@ -1974,13 +1974,33 @@ class AsyncioGspreadWorksheet(object):
             value_render_option=value_render_option,
         )
 
-    async def get_all_values(self) -> List[List[str]]:
+    async def get_all_values(
+        self,
+        range_name: Optional[str] = None,
+        major_dimension: gspread.utils.Dimension = None,
+        value_render_option: gspread.utils.ValueRenderOption = None,
+        date_time_render_option: gspread.utils.DateTimeOption = None,
+        combine_merged_cells: bool = False,
+        maintain_size: bool = False,
+        pad_values: bool = True,
+        return_type: gspread.utils.GridRangeType = gspread.utils.GridRangeType.ListOfLists,
+    ) -> List[List[str]]:
         """Returns a list of lists containing all cells' values as strings.
         Wraps :meth:`gspread.Worksheet.get_all_values`.
 
         :rtype: :class:`~typing.List`\\[:class:`~typing.List`\\[:class:`str`\\]\\]
         """
-        return await self.agcm._call(self.ws.get_all_values)
+        return await self.agcm._call(
+            self.ws.get_all_values,
+            range_name=range_name,
+            major_dimension=major_dimension,
+            value_render_option=value_render_option,
+            date_time_render_option=date_time_render_option,
+            combine_merged_cells=combine_merged_cells,
+            maintain_size=maintain_size,
+            pad_values=pad_values,
+            return_type=return_type,
+        )
 
     async def get_note(self, cell: str) -> str:
         """Get the content of the note located at cell, or the empty string
