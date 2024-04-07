@@ -22,6 +22,7 @@ Requires Python >= 3.8.
 import asyncio
 
 import gspread_asyncio
+from gspread_asyncio import AsyncioGspreadClientManager
 
 # from google-auth package
 from google.oauth2.service_account import Credentials 
