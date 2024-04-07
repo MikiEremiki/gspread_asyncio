@@ -47,7 +47,7 @@ agcm = gspread_asyncio.AsyncioGspreadClientManager(get_creds)
 
 # Here's an example of how you use the API:
 
-async def example(agcm):
+async def example(agcm: AsyncioGspreadClientManager):
     # Always authorize first.
     # If you have a long-running program call authorize() repeatedly.
     agc = await agcm.authorize()
