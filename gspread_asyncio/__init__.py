@@ -1046,6 +1046,41 @@ class AsyncioGspreadSpreadsheet(object):
             body=body,
         )
 
+
+        async def values_batch_update(self, body: dict = None) -> dict:
+        """Lower-level method that directly calls `spreadsheets/<ID>/values:batchUpdate <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate>`_.
+
+        :param dict body: (optional) `Request body`_.
+
+        :returns: `Response body`_.
+        :rtype: dict
+
+        Example::
+            value_input_option = 'RAW'
+            major_dimension = 'ROWS'
+            sh.values_batch_update(
+                body={
+                    'valueInputOption': value_input_option,
+                    'data': [
+                        {
+                            'range': 'Sheet1!A2:C2',
+                            'majorDimension': major_dimension,
+                            'values': [[1, 2, 3]]
+                        },
+                        {
+                            'range': 'Sheet1!A10:C10',
+                            'majorDimension': major_dimension,
+                            'values': [[4, 5, 6]]
+                        },
+                    ]
+                }
+            )
+
+        .. versionadded:: 2.0
+        """
+        return await self.agcm._call(self.ss.values_batch_update, body=body)
+    
+
     async def worksheet(self, title: str) -> "AsyncioGspreadWorksheet":
         """Gets a worksheet (tab) by title. Wraps
         :meth:`gspread.Spreadsheet.worksheet`.
